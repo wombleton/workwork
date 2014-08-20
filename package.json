@@ -1,0 +1,31 @@
+{
+  "name": "workwork",
+  "version": "0.0.1",
+  "description": "Lists the working days between two dates, taking into account holidays. Also can add \"pseudo-holidays\".",
+  "main": "index.js",
+  "scripts": {
+    "test": "nodeunit test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wombleton/workwork"
+  },
+  "keywords": [
+    "working-days",
+    "holidays",
+    "work",
+    "days",
+    "dates"
+  ],
+  "author": "Rowan Crawford <wombleton@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "rrule": "^2.1.0",
+    "liberty": "^0.1.1",
+    "moment": "^2.8.1",
+    "lodash": "^2.4.1"
+  },
+  "devDependencies": {
+    "nodeunit": "^0.9.0"
+  }
+}
