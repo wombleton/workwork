@@ -5,9 +5,16 @@ var Liberty = require('liberty'),
 
 module.exports = function(jurisdiction) {
   return {
-    between: function(from, to) {
+    between: function(from, to, options) {
       var holidays,
+        excepts,
         days;
+
+      from = moment(from).toDate();
+      to = moment(to).toDate();
+
+      options = options || {};
+      excepts = options.except || [];
 
       // use a RRule including Mon — Fri in the range
       days = new RRule({
@@ -21,6 +28,20 @@ module.exports = function(jurisdiction) {
       // use Liberty in the jurisdiction to get an array of holidays as millisecond since epoch
       holidays = _.map(new Liberty(jurisdiction).between(from, to), function(day) {
         return day.date.valueOf();
+      });
+
+      _.each(excepts, function(rule) {
+        var options = RRule.parseString(rule),
+          dates;
+
+        options.dtstart = from;
+        options.until = to;
+
+        dates = new RRule(options).all();
+
+        _.each(dates, function(day) {
+          holidays.push(day.valueOf());
+        });
       });
 
       // return any days without a matching ms-since-epoch holiday
