@@ -17,3 +17,19 @@ exports['returns Wed, excluding Queens Birthday and the exclusion'] = function(t
   test.equals(days[0].valueOf(), moment('2014-06-04').valueOf());
   test.done();
 };
+
+exports['get holidays for two regions (varargs)'] = function(test) {
+  // checks that public holidays for nz as well as nz_we are taken into account
+  var days = workwork('nz', 'nz_we').between('2014-01-01', '2014-01-20');
+  console.log(days);
+  test.equals(days.length, 11);
+  test.done();
+};
+
+exports['get holidays for two regions (array)'] = function(test) {
+  // checks that public holidays for nz as well as nz_we are taken into account
+  var days = workwork(['nz', 'nz_we']).between('2014-01-01', '2014-01-20');
+  console.log(days);
+  test.equals(days.length, 11);
+  test.done();
+};
