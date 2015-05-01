@@ -1,6 +1,6 @@
 {
   "name": "workwork",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Lists the working days between two dates, taking into account holidays.",
   "main": "index.js",
   "scripts": {
