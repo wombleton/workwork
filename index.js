@@ -4,6 +4,12 @@ var Liberty = require('liberty'),
   _ = require('lodash');
 
 module.exports = function(jurisdiction) {
+  var jurisdictions;
+  if (arguments.length === 1 && _.isArray(arguments[0])) {
+    jurisdictions = _.toArray(arguments[0]);
+  } else {
+    jurisdictions = _.toArray(arguments);
+  }
   return {
     between: function(from, to, options) {
       var holidays,
@@ -26,7 +32,7 @@ module.exports = function(jurisdiction) {
       }).all();
 
       // use Liberty in the jurisdiction to get an array of holidays as millisecond since epoch
-      holidays = _.map(new Liberty(jurisdiction).between(from, to), function(day) {
+      holidays = _.map(new Liberty(jurisdictions).between(from, to), function(day) {
         return day.date.valueOf();
       });
 
